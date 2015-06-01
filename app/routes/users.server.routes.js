@@ -10,6 +10,7 @@ module.exports = function(app) {
 	var users = require('../../app/controllers/users.server.controller');
 
 	// Setting up the users profile api
+
 	app.route('/users/me').get(users.me);
 	app.route('/users').put(users.update);
 	app.route('/users/accounts').delete(users.removeOAuthProvider);
@@ -39,7 +40,13 @@ module.exports = function(app) {
 	app.route('/auth/google').get(passport.authenticate('google', {
 		scope: [
 			'https://www.googleapis.com/auth/userinfo.profile',
-			'https://www.googleapis.com/auth/userinfo.email'
+			'https://www.googleapis.com/auth/userinfo.email',
+			'https://www.googleapis.com/auth/youtube',
+			'https://www.googleapis.com/auth/youtube.force-ssl',
+			'https://www.googleapis.com/auth/youtube.readonly',
+			'https://www.googleapis.com/auth/youtube.upload',
+			'https://www.googleapis.com/auth/youtubepartner',
+			'https://www.googleapis.com/auth/youtubepartner-channel-audit'
 		]
 	}));
 	app.route('/auth/google/callback').get(users.oauthCallback('google'));
